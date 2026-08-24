@@ -2,12 +2,12 @@ import { ROUTES } from '@/config/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
+import { NavLinks } from './docs-navigation';
 
-export default function LeftNav
-() {
+export default function LeftNav({ onClose }: { onClose?: () => void }) {
   return (
     <aside className="hidden md:block sticky top-0 h-screen w-64 shrink-0 border-r border-border py-6 px-2 md:px-3 overflow-y-auto no-scrollbar scroll-smooth">
-        <Link
+        <a
             href={ROUTES.HOME}
             className="flex mb-8 items-center justify-center"
         >
@@ -26,7 +26,8 @@ export default function LeftNav
                   Canopy UI
                 </h2>
             </div>
-        </Link>
+        </a>
+        <NavLinks onLinkClick={onClose}/>
     </aside>
   )
 }

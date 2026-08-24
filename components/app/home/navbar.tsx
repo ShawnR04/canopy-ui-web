@@ -2,7 +2,7 @@
 
 import { ROUTES } from '@/config/routes';
 import { useGithubData } from '@/hooks/use-github-data';
-import { Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { BsStarFill } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import { FaGithub } from 'react-icons/fa';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(!false);
 
     const { formattedStars, version, repoUrl } = useGithubData();
 
@@ -115,8 +115,50 @@ export default function Navbar() {
 
               {/* Animated Mobile Menu Drawer */}
               <div 
-                  className={``}
-              ></div>
+                  className={`md:hidden grid transition-all duration-300 ease-in-out ${
+                    mobileMenuOpen
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0 pointer-events-none'
+                }`}
+              >
+                <div className="overflow-hidden">
+                    <div className="bg-background/95 px-5 py-6 space-y-6">
+                        <a
+                          href=""
+                          className="block hover:text-primary-400 transition-colors"
+                        >
+                          Quick Start
+                        </a>
+                        <a
+                          href={ROUTES.DOCS.INTRODUCTION}
+                          className="block hover:text-primary-400 transition-colors"
+                        >
+                          Documetation
+                        </a>
+                        <a
+                          href={ROUTES.DOCS.COMPONENTS.ROOT}
+                          className="block hover:text-primary-400 transition-colors"
+                        >
+                          Components
+                        </a>
+                        <a
+                          href=""
+                          className="block hover:text-primary-400 transition-colors"
+                        >
+                          FAQ
+                        </a>
+                        <a
+                          href={repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 py-1 text-primary-400 transition-colors"
+                        >
+                          Github Repository
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                    </div>
+                </div>
+              </div>
           </header>
       </>
     )

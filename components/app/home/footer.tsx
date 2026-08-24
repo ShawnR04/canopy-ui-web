@@ -30,56 +30,25 @@ export default function Footer() {
 
             {/* Explore Column */}
             <div className="space-y-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <h3 className="">
                 Explore
               </h3>
-              <ul className="space-y-1.5">
-                <li>
-                  <a href="" className="text-foreground/80 hover:text-foreground transition-colors">
+              <ul className="">
+                <li className="">
+                  <a href="" className="">
                     Documentation
                   </a>
                 </li>
-                <li>
-                  <a href="" className="text-foreground/80 hover:text-foreground transition-colors">
+                <li className="">
+                  <a href="" className="">
                     Components
-                  </a>
-                </li>
-                <li>
-                  <a href="" className="text-foreground/80 hover:text-foreground transition-colors">
-                    FAQs
                   </a>
                 </li>
               </ul>
             </div>
 
             {/* Community Column */}
-            <div className="space-y-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Explore
-              </h3>
-              <ul className="space-y-1.5">
-            <li>
-              <a
-                href="https://github.com/ShawnR04/canopy-ui"
-                target="_blank"
-                rel="noreferrer"
-                className="text-foreground/80 hover:text-foreground transition-colors"
-              >
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.npmjs.com/package/@marv3l/canopy-ui"
-                target="_blank"
-                rel="noreferrer"
-                className="text-foreground/80 hover:text-foreground transition-colors"
-              >
-                NPM Package
-              </a>
-            </li>
-          </ul>
-            </div>
+            <div className="space-y-2">h</div>
 
           </div>
 
