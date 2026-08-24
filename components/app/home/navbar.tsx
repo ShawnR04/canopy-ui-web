@@ -4,7 +4,7 @@ import { ROUTES } from '@/config/routes';
 import { useGithubData } from '@/hooks/use-github-data';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsStarFill } from 'react-icons/bs';
 import { FaGithub } from 'react-icons/fa';
 
@@ -13,13 +13,21 @@ export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const { formattedStars, version, repoUrl } = useGithubData();
+
+    useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
     return (
       <>
           <header 
             className={`fixed top-0 left-0 right-0 z-50 border-b border-border/80 transition-all duration-150 py-3 ${
                 isScrolled
-                    ? 'bg-background/75 backdrop-blur-md py-3 shadow-lg'
-                    : 'bg-background py-5'
+                    ? 'bg-background/85 backdrop-blur-md py-3 shadow-lg'
+                    : 'bg-background/75 py-5'
             }`}
           >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
