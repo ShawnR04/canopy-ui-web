@@ -1,9 +1,13 @@
-'use client'
-import React from 'react'
+'use client';
+
+import React, { useState } from 'react';
 import LeftNav from './left-navbar';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { RightSidebarContent } from './right-navbar';
 
 export const navigation = [
   {
@@ -82,7 +86,6 @@ export function NavLinks({ onLinkClick }: { onLinkClick?: () => void }) {
                       : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'
                   }`}
                 >
-                  {/* Left Active Indicator Bar */}
                   {isActive && (
                     <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary-600 dark:bg-primary-400" />
                   )}
@@ -115,11 +118,122 @@ export function NavLinks({ onLinkClick }: { onLinkClick?: () => void }) {
 }
 
 export default function DocsNav() {
+  const [leftOpen, setLeftOpen] = useState(false);
+  const [rightOpen, setRightOpen] = useState(false);
+
+  const closeAll = () => {
+    setLeftOpen(false);
+    setRightOpen(false);
+  };
+
   return (
     <>
-        <div className="hidden md:block">
-            <LeftNav/>
+      {/* Mobile & Tablet Top Header */}
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur-md lg:hidden">
+        <button
+          onClick={() => setLeftOpen(true)}
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-card/60 text-foreground transition-colors hover:bg-accent"
+          aria-label="Open navigation menu"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+
+        <Link href="/" className="group flex items-center gap-2">
+          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-primary-300 to-primary-500 flex items-center justify-center shadow-lg shadow-primary-500/20 transition-transform">
+            <Image
+              src="/favicon.ico"
+              alt="Canopy UI logo"
+              width={100}
+              height={100}
+              className="w-7 h-7"
+              priority
+            />
+          </div>
+          <h2 className="flex items-center font-display text-lg font-semibold tracking-wider">
+            Canopy UI
+          </h2>
+        </Link>
+
+        <button
+          onClick={() => setRightOpen(true)}
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-card/60 text-foreground transition-colors hover:bg-accent"
+          aria-label="Open document outline"
+        >
+          <BsThreeDotsVertical className="h-4 w-4" />
+        </button>
+      </header>
+
+      {/* Backdrop (Active when any drawer is open) */}
+      {(leftOpen || rightOpen) && (
+        <div
+          onClick={closeAll}
+          className="fixed inset-0 z-50 bg-background/60 backdrop-blur-xs transition-opacity duration-200 lg:hidden"
+        />
+      )}
+
+      {/* Left Slide-Out Drawer (Mobile & Tablet) */}
+      <aside
+        className={`no-scrollbar fixed top-0 bottom-0 left-0 z-50 w-72 border-r border-border bg-background/95 p-5 shadow-2xl backdrop-blur-lg transition-transform duration-200 ease-out lg:hidden ${
+          leftOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="mb-5 flex items-center justify-between border-b border-border pb-4">
+          <Link href="/" onClick={closeAll} className="group flex items-center space-x-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 shadow-sm shadow-primary-500/20 transition-transform group-hover:scale-105">
+              <Image
+                src="/favicon.ico"
+                alt="Canopy UI logo"
+                width={20}
+                height={20}
+                className="h-7 w-7"
+                priority
+              />
+            </div>
+            <h2 className="font-display text-lg font-bold tracking-wider text-foreground">
+              Canopy UI
+            </h2>
+          </Link>
+          <button
+            onClick={closeAll}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            aria-label="Close menu"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
+
+        <div className="overflow-y-auto max-h-[calc(100vh-5rem)] pr-1">
+          <NavLinks onLinkClick={closeAll} />
+        </div>
+      </aside>
+
+      {/* Right Slide-Out Drawer (Mobile & Tablet) */}
+      <aside
+        className={`no-scrollbar fixed top-0 bottom-0 right-0 z-50 w-80 border-l border-border bg-background/95 p-5 shadow-2xl backdrop-blur-lg transition-transform duration-200 ease-out lg:hidden ${
+          rightOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="mb-4 flex items-center justify-between border-b border-border pb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            Information
+          </span>
+          <button
+            onClick={closeAll}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            aria-label="Close outline"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="overflow-y-auto max-h-[calc(100vh-5rem)] no-scrollbar">
+          <RightSidebarContent />
+        </div>
+      </aside>
+
+      {/* Static Desktop Left Sidebar */}
+      <div className="hidden lg:block">
+        <LeftNav />
+      </div>
     </>
-  )
+  );
 }

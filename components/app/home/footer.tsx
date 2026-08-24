@@ -19,7 +19,7 @@ export default function Footer() {
                         priority
                     />
                 </div>
-                <h2 className="flex items-center font-display text-lg font-semibold tracking-tight ">
+                <h2 className="flex items-center font-display text-lg font-semibold tracking-wider ">
                   Canopy UI
                 </h2>
               </div>

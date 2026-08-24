@@ -48,7 +48,7 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <p className="font-display font-extrabold text-lg tracking-wide">
+                        <p className="font-display font-extrabold text-lg tracking-wider">
                             Canopy UI
                         </p>
                         <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-primary-500/10 text-primary-400 border border-primary-500/20">

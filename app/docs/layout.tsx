@@ -9,9 +9,9 @@ export default function DocsLayout({
 }) {
   return (
     <div className="h-screen overflow-hidden flex justify-center bg-background">
-      <div className="flex flex-col md:flex-row w-full h-full max-w-7xl justify-between">
+      <div className="flex flex-col lg:flex-row w-full h-full max-w-7xl justify-between">
         <DocsNav />
-        <main className="flex-1 max-w-2xl lg:max-w-3xl py-6 px-2 md:px-3 h-full overflow-y-auto min-w-0 no-scrollbar">
+        <main className="flex-1 max-w-2xl lg:max-w-3xl py-6 px-4 md:px-6 h-full overflow-y-auto min-w-0 no-scrollbar">
           {children}
         </main>
         <RightNav />
