@@ -30,26 +30,62 @@ export default function Footer() {
 
             {/* Explore Column */}
             <div className="space-y-2">
-              <h3 className="">
-                Explore
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                EXPLORE
               </h3>
-              <ul className="">
+              <ul className="space-y-5 md:space-y-1.5">
                 <li className="">
-                  <a href="" className="">
+                  <a 
+                    href="" 
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
                     Documentation
                   </a>
                 </li>
                 <li className="">
-                  <a href="" className="">
+                  <a 
+                    href="" 
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
                     Components
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="text-foreground/80 hover:text-foreground transition-colors">
+                    FAQ
                   </a>
                 </li>
               </ul>
             </div>
 
             {/* Community Column */}
-            <div className="space-y-2">h</div>
-
+            <div className="space-y-2">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Community
+              </h3>
+              <ul className="space-y-5 md:space-y-1.5">
+                <li>
+                  <a
+                    href="https://github.com/ShawnR04/canopy-ui"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.npmjs.com/package/@marv3l/canopy-ui"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    NPM Package
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Bottom Copyright Strip */}
