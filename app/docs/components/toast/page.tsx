@@ -3,7 +3,9 @@ import React from 'react'
 export default function Toast() {
   return (
     <>
-        <div className=""></div>
+        <div className="">
+          Toast
+        </div>
     </>
   )
 }

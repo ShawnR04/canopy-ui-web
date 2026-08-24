@@ -3,7 +3,9 @@ import React from 'react'
 export default function Advanced() {
   return (
     <>
-        <div className=""></div>
+        <div className="">
+          Advanced
+        </div>
     </>
   )
 }

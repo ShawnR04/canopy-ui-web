@@ -3,7 +3,9 @@ import React from 'react'
 export default function Setup() {
   return (
     <>
-        <div className=""></div>
+        <div className="">
+          Setup
+        </div>
     </>
   )
 }

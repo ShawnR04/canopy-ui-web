@@ -3,7 +3,9 @@ import React from 'react'
 export default function Introduction() {
   return (
     <>
-        <div className=""></div>
+        <div className="">
+          Introduction
+        </div>
     </>
   )
 }
