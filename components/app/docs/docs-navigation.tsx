@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LeftNav from './left-navbar';
 import { ExternalLink, Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -120,6 +120,33 @@ export function NavLinks({ onLinkClick }: { onLinkClick?: () => void }) {
 export default function DocsNav() {
   const [leftOpen, setLeftOpen] = useState(false);
   const [rightOpen, setRightOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always stay visible near the top of the page
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      } 
+      // Scrolling down -> hide navbar
+      else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        setIsVisible(false);
+      } 
+      // Scrolling up -> show navbar
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const closeAll = () => {
     setLeftOpen(false);
@@ -128,8 +155,12 @@ export default function DocsNav() {
 
   return (
     <>
-      {/* Mobile & Tablet Top Header */}
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur-md lg:hidden">
+      {/* Mobile & Tablet Auto-Hiding Sticky Top Header */}
+      <header
+        className={`sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur-md transition-transform duration-300 ease-in-out lg:hidden ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
         <button
           onClick={() => setLeftOpen(true)}
           className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-card/60 text-foreground transition-colors hover:bg-accent"
@@ -139,7 +170,7 @@ export default function DocsNav() {
         </button>
 
         <Link href="/" className="group flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-primary-300 to-primary-500 flex items-center justify-center shadow-lg shadow-primary-500/20 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center shadow-lg shadow-primary-500/20 transition-transform">
             <Image
               src="/favicon.ico"
               alt="Canopy UI logo"
