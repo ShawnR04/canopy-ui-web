@@ -10,7 +10,7 @@ import { FaGithub } from 'react-icons/fa';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(!false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const { formattedStars, version, repoUrl } = useGithubData();
 
