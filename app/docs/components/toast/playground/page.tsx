@@ -525,7 +525,7 @@ export default function Toast() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-8 sm:px-6 lg:h-screen lg:min-h-0 lg:overflow-hidden lg:pb-4">
+    <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-4 sm:px-6 lg:h-screen lg:min-h-0 lg:overflow-hidden lg:pb-5">
       {/* Header Banner */}
       <div className="shrink-0 pt-1">
         <Header
