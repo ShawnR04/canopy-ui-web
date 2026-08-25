@@ -60,12 +60,11 @@ export default function Navbar() {
                   {/* Desktop Navigation Links */}
                   <nav className="hidden md:flex items-center gap-6 font-medium">
                     <a 
-                        href="" 
+                        href={ROUTES.HOME}
                         className="text-muted-foreground hover:text-foreground transition-colors"
                     >
-                        Quick Start
+                        Home
                     </a>
-
                     <a 
                         href={ROUTES.DOCS.COMPONENTS.ROOT}
                         className="text-muted-foreground hover:text-foreground transition-colors"

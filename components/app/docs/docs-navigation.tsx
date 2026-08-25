@@ -23,11 +23,6 @@ export const navigation = [
         title: 'Installation',
         desc: 'Install @marv3l/canopy-ui in your React or Next.js project.',
       },
-      {
-        href: '/docs/quick-start',
-        title: 'Quick Start',
-        desc: 'Get started with your first Canopy UI component.',
-      },
     ],
   },
   {
