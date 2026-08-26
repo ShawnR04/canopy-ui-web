@@ -4,7 +4,6 @@ import React from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/app/docs/components/header';
-import { Toaster } from '@/components/ui/toast';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 // Import rich modular documentation files
@@ -93,8 +92,6 @@ export default function CategoryDocPage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-      <Toaster />
-
       <Header
         componentName="toast"
         title={data.title}
