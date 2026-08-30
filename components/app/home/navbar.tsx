@@ -33,7 +33,7 @@ export default function Navbar() {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                   {/* Brand Logo */}
                   <a 
-                      href="" 
+                      href="#" 
                       className="flex items-center gap-2.5 group cursor-pointer"
                   >
                     <div className="w-9 h-9 rounded-xl bg-linear-to-br from-primary-300 to-primary-500 flex items-center justify-center shadow-lg shadow-primary-500/20 transition-transform">
@@ -83,7 +83,7 @@ export default function Navbar() {
                   {/* Github & CTA Buttons */}
                   <div className="hidden md:flex items-center gap-3">
                     <a 
-                        href="" 
+                        href="#faq" 
                         className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                         FAQs
@@ -123,12 +123,6 @@ export default function Navbar() {
                 <div className="overflow-hidden">
                     <div className="bg-background/95 px-5 py-6 space-y-6">
                         <a
-                          href=""
-                          className="block hover:text-primary-400 transition-colors"
-                        >
-                          Quick Start
-                        </a>
-                        <a
                           href={ROUTES.DOCS.INTRODUCTION}
                           className="block hover:text-primary-400 transition-colors"
                         >
@@ -141,7 +135,7 @@ export default function Navbar() {
                           Components
                         </a>
                         <a
-                          href=""
+                          href="#faq"
                           className="block hover:text-primary-400 transition-colors"
                         >
                           FAQ

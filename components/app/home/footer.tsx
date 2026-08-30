@@ -1,3 +1,4 @@
+import { ROUTES } from '@/config/routes';
 import Image from 'next/image';
 import React from 'react'
 
@@ -36,7 +37,15 @@ export default function Footer() {
               <ul className="space-y-5 md:space-y-1.5">
                 <li className="">
                   <a 
-                    href="" 
+                    href={ROUTES.HOME} 
+                    className="text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li className="">
+                  <a 
+                    href={ROUTES.DOCS.INTRODUCTION} 
                     className="text-foreground/80 hover:text-foreground transition-colors"
                   >
                     Documentation
@@ -44,7 +53,7 @@ export default function Footer() {
                 </li>
                 <li className="">
                   <a 
-                    href="" 
+                    href={ROUTES.DOCS.COMPONENTS.ROOT}
                     className="text-foreground/80 hover:text-foreground transition-colors"
                   >
                     Components
