@@ -123,19 +123,36 @@ export const ADVANCED_STEPS: CodeData[] = [
       'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400',
     description:
       'Automatically binds to any JavaScript Promise and handles loading, resolved, and rejected states.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-const uploadTask = async () => {
-  const response = await fetch("/api/upload");
-  if (!response.ok) throw new Error();
-  return response.json();
-};
+import { toast } from "@/components/ui/toast";
 
-toast.promise(uploadTask(), {
-  loading: "Uploading report...",
-  success: "Report compiled and sent.",
-  error: "Upload failed. Please retry.",
-});`,
+export default function Page() {
+  const handleUpload = () => {
+    const uploadTask = async () => {
+      const response = await fetch("/api/upload");
+      if (!response.ok) throw new Error();
+      return response.json();
+    };
+
+    toast.promise(uploadTask(), {
+      loading: "Uploading report...",
+      success: "Report compiled and sent.",
+      error: "Upload failed. Please retry.",
+    });
+  };
+
+  return (
+    <div className="p-8">
+      <button 
+        onClick={handleUpload}
+        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Upload Report
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () => {
       toast.promise(
         new Promise((resolve) => setTimeout(resolve, 2000)),
@@ -154,21 +171,38 @@ toast.promise(uploadTask(), {
       'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400',
     description:
       'Manually update an active toast in place by passing its existing unique ID.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-// 1. Trigger initial loading toast and capture instance
-const instance = toast.loading("Deploying package...", {
-  description: "Bundling source into distribution target.",
-});
+import { toast } from "@/components/ui/toast";
 
-// 2. Morph the existing toast into success when finished
-setTimeout(() => {
-  toast.success("Build verified", {
-    id: instance.id,
-    description: "Artifacts deployed to production edge.",
-    duration: 4000,
-  });
-}, 2000);`,
+export default function Page() {
+  const handleDeploy = () => {
+    // 1. Trigger initial loading toast and capture instance
+    const instance = toast.loading("Deploying package...", {
+      description: "Bundling source into distribution target.",
+    });
+
+    // 2. Morph the existing toast into success when finished
+    setTimeout(() => {
+      toast.success("Build verified", {
+        id: instance.id,
+        description: "Artifacts deployed to production edge.",
+        duration: 4000,
+      });
+    }, 2000);
+  };
+
+  return (
+    <div className="p-8">
+      <button 
+        onClick={handleDeploy}
+        className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Deploy Package
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () => {
       const instance = toast.loading('Deploying package...', {
         description: 'Bundling source into distribution target.',
@@ -189,32 +223,49 @@ setTimeout(() => {
       'border-indigo-200 bg-indigo-50 text-indigo-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-400',
     description:
       'Render interactive button triggers inside toast cards with self-dismissing callbacks.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-const { id, dismiss } = toast({
-  title: "File removed",
-  description: "project-spec.pdf was moved to trash.",
-  duration: 6000,
-  action: (
-    <div className="flex items-center gap-2 pt-1">
-      <button
-        onClick={() => {
-          dismiss();
-          toast.success("File restored successfully");
-        }}
-        className="rounded-md bg-neutral-900 px-2 py-1 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900"
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  const handleDelete = () => {
+    const { dismiss } = toast({
+      title: "File removed",
+      description: "project-spec.pdf was moved to trash.",
+      duration: 6000,
+      action: (
+        <div className="flex items-center gap-2 pt-1">
+          <button
+            onClick={() => {
+              dismiss();
+              toast.success("File restored successfully");
+            }}
+            className="rounded-md bg-neutral-900 px-2 py-1 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900"
+          >
+            Undo
+          </button>
+          <button
+            onClick={() => dismiss()}
+            className="rounded-md border border-border px-2 py-1 text-xs font-medium text-foreground hover:bg-muted"
+          >
+            Dismiss
+          </button>
+        </div>
+      ),
+    });
+  };
+
+  return (
+    <div className="p-8">
+      <button 
+        onClick={handleDelete}
+        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white"
       >
-        Undo
-      </button>
-      <button
-        onClick={() => dismiss()}
-        className="rounded-md border border-border px-2 py-1 text-xs font-medium text-foreground hover:bg-muted"
-      >
-        Dismiss
+        Delete File
       </button>
     </div>
-  ),
-});`,
+  );
+}`,
     onTrigger: () => {
       const { dismiss } = toast({
         title: 'File removed',
@@ -251,18 +302,44 @@ const { id, dismiss } = toast({
       'border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-400',
     description:
       'Dismiss individual toasts by ID, or wipe the entire viewport stack instantly.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-// Dismiss a specific toast by its ID
-toast.dismiss(toastId);
+import { toast } from "@/components/ui/toast";
 
-// Wipe all active notifications across all viewport anchors
-toast.dismiss();`,
+export default function Page() {
+  return (
+    <div className="flex gap-4 p-8">
+      <button
+        onClick={() => {
+          const active = toast({
+            title: "Dismissing in 1.5s...",
+            description: "Programmatically controlled via instance.dismiss()",
+            duration: 5000,
+          });
+          setTimeout(() => {
+            active.dismiss();
+          }, 1500);
+        }}
+        className="rounded-lg bg-pink-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Dismiss by ID
+      </button>
+
+      <button
+        onClick={() => toast.dismiss()}
+        className="rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Dismiss All
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () => {
       toast.dismiss();
     },
   },
 ];
+
 export default function Advanced() {
   const [copiedStep, setCopiedStep] = useState<number | null>(null);
 
@@ -302,7 +379,7 @@ export default function Advanced() {
           {/* Advanced Code & Live Demos */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <Terminal className="h-5 w-5 text-primary-500" />
+              <Terminal className="h-5 w-5 text-primary" />
               <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
                 Advanced Patterns & Snippets
               </h2>

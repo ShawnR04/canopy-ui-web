@@ -91,23 +91,9 @@ export default function CategoryDocPage() {
   const ContentComponent = data.component;
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
-      <Header
-        componentName="toast"
-        title={data.title}
-        desc={data.description}
-        breadcrumbs={data.breadcrumbs}
-        showPlayground
-        playgroundHref="/docs/components/toast/playground"
-      />
-
-      {/* Render the full content module */}
-      <div className="min-w-0 flex-1">
-        <ContentComponent />
-      </div>
-
-      {/* Pagination Footer */}
-      <div className="flex items-center justify-between border-t border-border pt-6">
+    <div className="mx-auto max-w-5xl space-y-8 px-4 sm:px-6 lg:px-8">
+{/* Pagination Footer */}
+      <div className="flex items-center justify-between border-b border-border py-5">
         {data.prev ? (
           <Link
             href={data.prev.href}
@@ -135,6 +121,20 @@ export default function CategoryDocPage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         )}
+      </div>
+
+      <Header
+        componentName="toast"
+        title={data.title}
+        desc={data.description}
+        breadcrumbs={data.breadcrumbs}
+        showPlayground
+        playgroundHref="/docs/components/toast/playground"
+      />
+
+      {/* Render the full content module */}
+      <div className="min-w-0 flex-1">
+        <ContentComponent />
       </div>
     </div>
   );

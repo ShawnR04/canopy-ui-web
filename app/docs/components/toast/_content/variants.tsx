@@ -87,12 +87,27 @@ export const VARIANT_EXAMPLES: CodeData[] = [
     badgeClass:
       'border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-500/20 dark:bg-violet-500/10 dark:text-violet-400',
     description: 'Basic neutral notification with an optional description.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast({
-  title: 'Project Saved',
-  description: 'Your workspace settings have been synchronized.',
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast({
+            title: 'Project Saved',
+            description: 'Your workspace settings have been synchronized.',
+          })
+        }
+        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast({
         title: 'Project Saved',
@@ -105,12 +120,27 @@ toast({
     badgeClass:
       'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400',
     description: 'Displays an emerald confirmation badge for completed operations.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast.success("Payment Received", {
-  description: "Invoice #4102 processed successfully.",
-  duration: 4000,
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast.success("Payment Received", {
+            description: "Invoice #4102 processed successfully.",
+            duration: 4000,
+          })
+        }
+        className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Success Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.success('Payment Received', {
         description: 'Invoice #4102 processed successfully.',
@@ -123,12 +153,27 @@ toast.success("Payment Received", {
     badgeClass:
       'border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-400',
     description: 'Rose-tinted alert state for runtime exceptions, validation failures, and errors.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast.error("Deployment Failed", {
-  description: "Build exited with code 1 in worker thread.",
-  duration: 5000,
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast.error("Deployment Failed", {
+            description: "Build exited with code 1 in worker thread.",
+            duration: 5000,
+          })
+        }
+        className="rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Error Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.error('Deployment Failed', {
         description: 'Build exited with code 1 in worker thread.',
@@ -141,12 +186,27 @@ toast.error("Deployment Failed", {
     badgeClass:
       'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-400',
     description: 'Amber indicator for non-fatal issues and operations requiring user review.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast.warning("Draft Unsaved", {
-  description: "Your modifications are cached locally.",
-  duration: 4000,
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast.warning("Draft Unsaved", {
+            description: "Your modifications are cached locally.",
+            duration: 4000,
+          })
+        }
+        className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Warning Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.warning('Draft Unsaved', {
         description: 'Your modifications are cached locally.',
@@ -159,12 +219,27 @@ toast.warning("Draft Unsaved", {
     badgeClass:
       'border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-500/20 dark:bg-sky-500/10 dark:text-sky-400',
     description: 'Sky-blue indicator for system updates, release logs, and non-blocking tips.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast.info("Release v1.2.0", {
-  description: "New animation physics now available.",
-  duration: 4000,
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast.info("Release v1.2.0", {
+            description: "New animation physics now available.",
+            duration: 4000,
+          })
+        }
+        className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Info Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.info('Release v1.2.0', {
         description: 'New animation physics now available.',
@@ -177,20 +252,34 @@ toast.info("Release v1.2.0", {
     badgeClass:
       'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400',
     description: 'Spins an indeterminate loader and updates in place when the promise settles.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-const instance = toast.loading("Deploying package...", {
-  description: "Bundling source into distribution target.",
-});
+import { toast } from "@/components/ui/toast";
 
-// Update toast when async task finishes
-setTimeout(() => {
-  toast.success("Build verified", {
-    id: instance.id,
-    description: "Artifacts deployed to edge network.",
-    duration: 4000,
-  });
-}, 2000);`,
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() => {
+          const instance = toast.loading("Deploying package...", {
+            description: "Bundling source into distribution target.",
+          });
+
+          setTimeout(() => {
+            toast.success("Build verified", {
+              id: instance.id,
+              description: "Artifacts deployed to edge network.",
+              duration: 4000,
+            });
+          }, 2000);
+        }}
+        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Async Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () => {
       const instance = toast.loading('Deploying package...', {
         description: 'Bundling source into distribution target.',
@@ -244,8 +333,8 @@ export default function Variants() {
           {/* Variant Code & Live Demos */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <Terminal className="h-5 w-5 text-primary-500"/>
-              <h2 className="text-base font-bold tracking-tight text-foreground sm-text-lg">
+              <Terminal className="h-5 w-5 text-primary"/>
+              <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
                 Variant Snippets
               </h2>
             </div>

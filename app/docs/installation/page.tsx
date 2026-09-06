@@ -39,10 +39,10 @@ export default function InstallationPage() {
   };
 
   const manualInstallCommands = {
-    npm: 'npm install @marv3l/canopy-ui lucide-react',
-    pnpm: 'pnpm add @marv3l/canopy-ui lucide-react',
-    yarn: 'yarn add @marv3l/canopy-ui lucide-react',
-    bun: 'bun add @marv3l/canopy-ui lucide-react',
+    npm: 'npm install clsx tailwind-merge class-variance-authority lucide-react',
+    pnpm: 'pnpm add clsx tailwind-merge class-variance-authority lucide-react',
+    yarn: 'yarn add clsx tailwind-merge class-variance-authority lucide-react',
+    bun: 'bun add clsx tailwind-merge class-variance-authority lucide-react',
   };
 
   const copyToClipboard = (text: string, stepIndex: number) => {
@@ -57,7 +57,7 @@ export default function InstallationPage() {
       <Header
         componentName="Getting Started"
         title="Installation"
-        desc="How to install dependencies, configure theme variables, and scaffold components in your application."
+        desc="How to configure your project, set up theme tokens, and scaffold Canopy UI components directly into your codebase."
         breadcrumbs={[
           { label: 'Getting Started', href: '/docs/introduction' },
           { label: 'Installation', href: '/docs/installation' },
@@ -68,7 +68,7 @@ export default function InstallationPage() {
       <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-950 dark:text-emerald-200">
         <Sparkles className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5" />
         <p className="text-xs leading-relaxed">
-          <strong className="font-semibold text-emerald-900 dark:text-emerald-100">Recommended:</strong> Use the Canopy UI CLI to automatically configure Tailwind CSS content paths, inject theme variables, and add component files directly to your project.
+          <strong className="font-semibold text-emerald-900 dark:text-emerald-100">Architecture Note:</strong> Canopy UI follows a copy-paste component model. Components are written directly into your source directory so you can customize them completely without relying on locked node_modules wrappers.
         </p>
       </div>
 
@@ -84,7 +84,7 @@ export default function InstallationPage() {
               Quick Start (CLI)
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Automatically configure Tailwind, inject tokens, and scaffold components.
+              Automatically configure Tailwind, inject tokens, and scaffold setup files.
             </p>
           </div>
           <div className="mt-4 flex items-center text-xs font-semibold text-foreground">
@@ -102,7 +102,7 @@ export default function InstallationPage() {
               Add Components
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Select and copy component code directly into your project.
+              Scaffold individual primitives into your project components folder.
             </p>
           </div>
           <div className="mt-4 flex items-center text-xs font-semibold text-foreground">
@@ -120,7 +120,7 @@ export default function InstallationPage() {
               Manual Setup
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Manually configure theme CSS variables and Tailwind content paths.
+              Manually configure utility helpers, Tailwind paths, and global css variables.
             </p>
           </div>
           <div className="mt-4 flex items-center text-xs font-semibold text-foreground">
@@ -141,7 +141,7 @@ export default function InstallationPage() {
         </div>
 
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Run the <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-xs text-foreground">init</code> command in your project root to auto-detect your project structure, configure your Tailwind content paths, and inject the base CSS variables:
+          Run the <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-xs text-foreground">init</code> command in your project root to auto-detect your project structure, configure paths, and create your <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-xs text-foreground">components.json</code> registry file:
         </p>
 
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
@@ -193,7 +193,7 @@ export default function InstallationPage() {
         </div>
 
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Use the <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-xs text-foreground">add</code> command to open the interactive selection menu:
+          Use the <code className="font-mono bg-muted px-1.5 py-0.5 rounded text-xs text-foreground">add</code> command to open the interactive selection menu and scaffold components into your project:
         </p>
 
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
@@ -233,7 +233,7 @@ export default function InstallationPage() {
         </div>
 
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Or specify the component name directly to install it without the prompt:
+          Or specify the component identifier directly to download and scaffold it immediately:
         </p>
 
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
@@ -280,7 +280,7 @@ export default function InstallationPage() {
             Manual Setup
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            If you prefer configuring your project manually without the CLI, follow these steps:
+            If you prefer setting up your codebase manually instead of running the CLI initialization, follow these configuration steps:
           </p>
         </div>
 
@@ -288,7 +288,7 @@ export default function InstallationPage() {
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
           <div className="flex items-center justify-between pb-3">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Step 1: Install Dependencies
+              Step 1: Install Peer Dependencies
             </span>
             <button
               onClick={() => copyToClipboard(manualInstallCommands[activeTab], 4)}
@@ -303,16 +303,16 @@ export default function InstallationPage() {
           </pre>
         </div>
 
-        {/* Manual Step 2: Tailwind Config */}
+        {/* Manual Step 2: Utility Helper */}
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
           <div className="flex items-center justify-between pb-3">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Step 2: Update Tailwind Config (tailwind.config.ts)
+              Step 2: Create a cn Helper (lib/utils.ts)
             </span>
             <button
               onClick={() =>
                 copyToClipboard(
-                  `/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  darkMode: ["class"],\n  content: [\n    "./app/**/*.{js,ts,jsx,tsx,mdx}",\n    "./components/**/*.{js,ts,jsx,tsx,mdx}",\n    "./node_modules/@marv3l/canopy-ui/**/*.{js,ts,jsx,tsx}",\n  ],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n};`,
+                  `import { type ClassValue, clsx } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}`,
                   5
                 )
               }
@@ -323,77 +323,156 @@ export default function InstallationPage() {
             </button>
           </div>
           <pre className="overflow-x-auto rounded-xl bg-[#090b10] p-3.5 font-mono text-xs text-neutral-200">
-            <code>{`/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@marv3l/canopy-ui/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};`}</code>
+            <code>{`import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}</code>
           </pre>
         </div>
 
         {/* Manual Step 3: Theme Variables */}
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs">
           <div className="flex items-center justify-between pb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Step 3: Add Theme Variables (app/globals.css)
-            </span>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Step 3: Add Theme Variables (app/globals.css)
+              </span>
+              <span className="text-[11px] text-amber-600 dark:text-amber-400 font-medium">
+                Note: If you don&apos;t have the CSS, it is auto-generated during CLI init.
+              </span>
+            </div>
             <button
               onClick={() =>
                 copyToClipboard(
-                  `@layer base {\n  :root {\n    --background: 0 0% 100%;\n    --foreground: 240 10% 3.9%;\n    --card: 0 0% 100%;\n    --card-foreground: 240 10% 3.9%;\n    --border: 240 5.9% 90%;\n    --muted: 240 4.8% 95.9%;\n    --muted-foreground: 240 3.8% 46.1%;\n    --accent: 240 4.8% 95.9%;\n    --primary: 217 91% 60%;\n    --destructive: 0 84.2% 60.2%;\n    --success: 142 76% 36%;\n    --success-bg: 142 76% 96%;\n    --warning: 38 92% 50%;\n    --warning-bg: 48 96% 96%;\n    --radius-lg: 0.625rem;\n  }\n\n  .dark {\n    --background: 240 10% 3.9%;\n    --foreground: 0 0% 98%;\n    --card: 240 10% 3.9%;\n    --card-foreground: 0 0% 98%;\n    --border: 240 3.7% 15.9%;\n    --muted: 240 3.7% 15.9%;\n    --muted-foreground: 240 5% 64.9%;\n    --accent: 240 3.7% 15.9%;\n    --primary: 217 91% 60%;\n    --destructive: 0 62.8% 30.6%;\n    --success: 142 70% 45%;\n    --success-bg: 160 84% 6%;\n    --warning: 38 92% 50%;\n    --warning-bg: 35 92% 8%;\n  }\n}`,
+                  `:root {\n  --border: #e5e5e5;\n  --input: #e5e5e5;\n  --ring: #171717;\n  --radius-lg: 0.625rem;\n\n  /* Primary */\n  --primary: #171717;\n  --primary-foreground: #fafafa;\n  --primary-hover: #262626;\n\n  /* Secondary */\n  --secondary: #e5e5e5;\n  --secondary-foreground: #262626;\n  --secondary-hover: #d4d4d4;\n  --secondary-border: #d4d4d4;\n\n  /* Muted & Accent */\n  --muted: #f5f5f5;\n  --muted-foreground: #737373;\n  --accent: #f5f5f5;\n  --accent-foreground: #171717;\n  --accent-hover: #e5e5e5;\n\n  /* Status Colors */\n  --destructive: #dc2626;\n  --destructive-foreground: #ffffff;\n  --destructive-hover: #b91c1c;\n\n  --success: #059669;\n  --success-foreground: #ffffff;\n  --success-hover: #047857;\n\n  --warning: #d97706;\n  --warning-foreground: #ffffff;\n  --warning-hover: #b45309;\n\n  --info: #0284c7;\n  --info-foreground: #ffffff;\n  --info-hover: #0369a1;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --border: rgba(64, 64, 64, 0.8);\n    --input: rgba(64, 64, 64, 0.8);\n    --ring: #a3a3a3;\n\n    --primary: #fafafa;\n    --primary-foreground: #171717;\n    --primary-hover: #e5e5e5;\n\n    --secondary: #262626;\n    --secondary-foreground: #fafafa;\n    --secondary-hover: #404040;\n    --secondary-border: #404040;\n\n    --muted: #262626;\n    --muted-foreground: #a3a3a3;\n    --accent: #262626;\n    --accent-foreground: #fafafa;\n    --accent-hover: #333333;\n\n    --destructive: #ef4444;\n    --destructive-foreground: #ffffff;\n    --destructive-hover: #dc2626;\n\n    --success: #10b981;\n    --success-foreground: #ffffff;\n    --success-hover: #059669;\n\n    --warning: #f59e0b;\n    --warning-foreground: #ffffff;\n    --warning-hover: #d97706;\n\n    --info: #0ea5e9;\n    --info-foreground: #ffffff;\n    --info-hover: #0284c7;\n  }\n}\n\n@theme inline {\n  --color-border: var(--border);\n  --color-input: var(--input);\n  --color-ring: var(--ring);\n\n  --color-primary: var(--primary);\n  --color-primary-foreground: var(--primary-foreground);\n  --color-primary-hover: var(--primary-hover);\n\n  --color-secondary: var(--secondary);\n  --color-secondary-foreground: var(--secondary-foreground);\n  --color-secondary-hover: var(--secondary-hover);\n  --color-secondary-border: var(--secondary-border);\n\n  --color-muted: var(--muted);\n  --color-muted-foreground: var(--muted-foreground);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-accent-hover: var(--accent-hover);\n\n  --color-destructive: var(--destructive);\n  --color-destructive-foreground: var(--destructive-foreground);\n  --color-destructive-hover: var(--destructive-hover);\n\n  --color-success: var(--success);\n  --color-success-foreground: var(--success-foreground);\n  --color-success-hover: var(--success-hover);\n\n  --color-warning: var(--warning);\n  --color-warning-foreground: var(--warning-foreground);\n  --color-warning-hover: var(--warning-hover);\n\n  --color-info: var(--info);\n  --color-info-foreground: var(--info-foreground);\n  --color-info-hover: var(--info-hover);\n}`,
                   6
                 )
               }
-              className="flex items-center gap-1.5 rounded-lg border border-border/80 px-2 py-1 text-xs text-muted-foreground transition hover:bg-muted hover:text-foreground"
+              className="flex items-center gap-1.5 rounded-lg border border-border/80 px-2 py-1 text-xs text-muted-foreground transition hover:bg-muted hover:text-foreground shrink-0"
             >
               {copiedStep === 6 ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
               <span>{copiedStep === 6 ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
-          <pre className="overflow-x-auto rounded-xl bg-[#090b10] p-3.5 font-mono text-xs text-neutral-200">
-            <code>{`@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --border: 240 5.9% 90%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --primary: 217 91% 60%;
-    --destructive: 0 84.2% 60.2%;
-    --success: 142 76% 36%;
-    --success-bg: 142 76% 96%;
-    --warning: 38 92% 50%;
-    --warning-bg: 48 96% 96%;
-    --radius-lg: 0.625rem;
-  }
+          <pre className="overflow-x-auto max-h-112 rounded-xl bg-[#090b10] p-3.5 font-mono text-xs text-neutral-200">
+            <code>{`:root {
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #171717;
+  --radius-lg: 0.625rem;
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --primary: 217 91% 60%;
-    --destructive: 0 62.8% 30.6%;
-    --success: 142 70% 45%;
-    --success-bg: 160 84% 6%;
-    --warning: 38 92% 50%;
-    --warning-bg: 35 92% 8%;
+  /* Primary */
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --primary-hover: #262626;
+
+  /* Secondary */
+  --secondary: #e5e5e5;
+  --secondary-foreground: #262626;
+  --secondary-hover: #d4d4d4;
+  --secondary-border: #d4d4d4;
+
+  /* Muted & Accent */
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --accent-hover: #e5e5e5;
+
+  /* Status Colors */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --destructive-hover: #b91c1c;
+
+  --success: #059669;
+  --success-foreground: #ffffff;
+  --success-hover: #047857;
+
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+  --warning-hover: #b45309;
+
+  --info: #0284c7;
+  --info-foreground: #ffffff;
+  --info-hover: #0369a1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border: rgba(64, 64, 64, 0.8);
+    --input: rgba(64, 64, 64, 0.8);
+    --ring: #a3a3a3;
+
+    --primary: #fafafa;
+    --primary-foreground: #171717;
+    --primary-hover: #e5e5e5;
+
+    --secondary: #262626;
+    --secondary-foreground: #fafafa;
+    --secondary-hover: #404040;
+    --secondary-border: #404040;
+
+    --muted: #262626;
+    --muted-foreground: #a3a3a3;
+    --accent: #262626;
+    --accent-foreground: #fafafa;
+    --accent-hover: #333333;
+
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --destructive-hover: #dc2626;
+
+    --success: #10b981;
+    --success-foreground: #ffffff;
+    --success-hover: #059669;
+
+    --warning: #f59e0b;
+    --warning-foreground: #ffffff;
+    --warning-hover: #d97706;
+
+    --info: #0ea5e9;
+    --info-foreground: #ffffff;
+    --info-hover: #0284c7;
   }
+}
+
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-hover: var(--success-hover);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-hover: var(--warning-hover);
+
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-hover: var(--info-hover);
 }`}</code>
           </pre>
         </div>

@@ -77,14 +77,14 @@ export const STYLE_TRIGGERS: TriggerItemData[] = [
   },
   {
     label: 'Classes',
-    icon: <Code2 className="h-4 w-4 text-primary-500" />,
+    icon: <Code2 className="h-4 w-4 text-primary" />,
     buttonClass: 'border-border bg-card hover:border-border hover:bg-accent/40',
     labelClass: 'text-foreground',
     onClick: () =>
       toast({
         title: 'Tailwind Card',
         description: 'Rendered with custom rounded corners and ring borders.',
-        className: 'rounded-2xl border-2 border-primary-500/40 bg-card p-4 shadow-xl',
+        className: 'rounded-2xl border-2 border-primary/40 bg-card p-4 shadow-xl',
       }),
   },
 ];
@@ -97,19 +97,34 @@ export const CUSTOMIZATION_STEPS: CodeData[] = [
       'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700 dark:border-fuchsia-500/20 dark:bg-fuchsia-500/10 dark:text-fuchsia-400',
     description:
       'Override background, foreground, border, progress countdown, and icon colors per toast.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast({
-  title: "Brand Accent Notification",
-  description: "Custom color scheme matching your exact branding.",
-  customColor: {
-    bg: "#090d16",
-    text: "#f8fafc",
-    border: "#6366f1",
-    progress: "#818cf8",
-    icon: "#a5b4fc",
-  },
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast({
+            title: "Brand Accent Notification",
+            description: "Custom color scheme matching your exact branding.",
+            customColor: {
+              bg: "#090d16",
+              text: "#f8fafc",
+              border: "#6366f1",
+              progress: "#818cf8",
+              icon: "#a5b4fc",
+            },
+          })
+        }
+        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+      >
+        Show Custom Color Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast({
         title: 'Brand Accent Notification',
@@ -130,13 +145,28 @@ toast({
       'border-indigo-200 bg-indigo-50 text-indigo-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-400',
     description:
       'Inject custom Tailwind CSS classes directly onto the toast card element.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast({
-  title: "Glassmorphism Toast",
-  description: "Rendered with backdrop blur and semi-opaque backgrounds.",
-  className: "bg-indigo-950/70 backdrop-blur-md border-indigo-500/30 text-indigo-100 shadow-2xl",
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast({
+            title: "Glassmorphism Toast",
+            description: "Rendered with backdrop blur and semi-opaque backgrounds.",
+            className: "bg-indigo-950/70 backdrop-blur-md border-indigo-500/30 text-indigo-100 shadow-2xl",
+          })
+        }
+        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Glass Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast({
         title: 'Glassmorphism Toast',
@@ -152,12 +182,27 @@ toast({
       'border-teal-200 bg-teal-50 text-teal-700 dark:border-teal-500/20 dark:bg-teal-500/10 dark:text-teal-400',
     description:
       'Disable the auto-dismiss timer progress bar for a cleaner, minimalist layout.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-toast.success("Profile Updated", {
-  description: "Changes preserved without a bottom countdown line.",
-  showProgress: false,
-});`,
+import { toast } from "@/components/ui/toast";
+
+export default function Page() {
+  return (
+    <div className="p-8">
+      <button
+        onClick={() =>
+          toast.success("Profile Updated", {
+            description: "Changes preserved without a bottom countdown line.",
+            showProgress: false,
+          })
+        }
+        className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Show Clean Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.success('Profile Updated', {
         description: 'Changes preserved without a bottom countdown line.',
@@ -171,19 +216,38 @@ toast.success("Profile Updated", {
       'border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-500/20 dark:bg-yellow-500/10 dark:text-yellow-400',
     description:
       'Set custom visibility intervals in milliseconds, or pass Infinity for permanent toasts.',
-    code: `import { toast } from "@/components/ui/toast";
+    code: `'use client';
 
-// Fast dismiss toast (2 seconds)
-toast.info("Quick Notice", {
-  description: "This alert dismisses in exactly 2000ms.",
-  duration: 2000,
-});
+import { toast } from "@/components/ui/toast";
 
-// Persistent toast (requires user dismissal)
-toast.warning("Action Required", {
-  description: "Stays open until explicitly dismissed.",
-  duration: Infinity,
-});`,
+export default function Page() {
+  return (
+    <div className="flex gap-4 p-8">
+      <button
+        onClick={() =>
+          toast.info("Quick Notice", {
+            description: "This alert dismisses in exactly 2000ms.",
+            duration: 2000,
+          })
+        }
+        className="rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Quick Toast (2s)
+      </button>
+      <button
+        onClick={() =>
+          toast.warning("Action Required", {
+            description: "Stays open until explicitly dismissed.",
+            duration: Infinity,
+          })
+        }
+        className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white"
+      >
+        Permanent Toast
+      </button>
+    </div>
+  );
+}`,
     onTrigger: () =>
       toast.info('Quick Notice', {
         description: 'This alert dismisses in exactly 2000ms.',
@@ -230,8 +294,8 @@ export default function Customization() {
           {/* Variant Code & Live Demos */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <Layers className="h-5 w-5 text-primary-500"/>
-              <h2 className="text-base font-bold tracking-tight text-foreground sm-text-lg">
+              <Layers className="h-5 w-5 text-primary"/>
+              <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
                 Customization & Options Schema
               </h2>
             </div>

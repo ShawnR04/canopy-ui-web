@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import Header from '@/components/app/docs/components/header';
 import { toast, setToastPosition, type ToastPosition } from '@/components/ui/toast';
 import {
   Check,
   Compass,
   Copy,
-  Layers,
   Play,
   Sliders,
   Terminal,
@@ -27,31 +25,32 @@ export const SETUP_STEPS: SetupStepData[] = [
   {
     step: 'Step 1',
     title: 'Mount the Toaster in Root Layout',
-    code: `// app/layout.tsx
+    code: `'use client';
+
 import { Toaster } from "@/components/ui/toast";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className="min-h-screen bg-background antialiased">
         {children}
         <Toaster position="top-center" defaultDuration={4000} />
       </body>
     </html>
   );
-}
-      `,
+}`,
   },
   {
     step: 'Step 2',
     title: 'Configure Default Properties & Stacking Limits',
-    code: `// app/layout.tsx
+    code: `'use client';
+
 import { Toaster } from "@/components/ui/toast";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-background antialiased">
         {children}
         <Toaster 
           position="bottom-right" 
@@ -62,16 +61,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}
-    `,
+}`,
   },
   {
     step: "Step 3",
     title: "Dynamically Switch Viewport Anchors at Runtime",
-    code: `
+    code: `'use client';
+
 import { toast, setToastPosition } from "@/components/ui/toast";
 
-export function ActionPanel() {
+export default function Page() {
   const handleExport = () => {
     // Relocate viewport position for this session/action
     setToastPosition("bottom-right");
@@ -82,9 +81,17 @@ export function ActionPanel() {
     });
   };
 
-  return <button onClick={handleExport}>Download Archive</button>;
-}
-    `
+  return (
+    <div className="p-8">
+      <button 
+        onClick={handleExport}
+        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+      >
+        Download Archive
+      </button>
+    </div>
+  );
+}`
   }
 ];
 
@@ -157,9 +164,10 @@ export default function Setup() {
               <p className="text-xs text-muted-foreground">Click any quadrant to test live positioning in your viewport</p>
             </div>
             <span className="hidden items-center gap-1.5 rounded-md border border-border/80 bg-muted/40 px-2.5 py-1 text-xs font-mono text-muted-foreground sm:inline-flex">
-              <Compass className="h-3.5 w-3.5 text-primary-500" />
+              <Compass className="h-3.5 w-3.5 text-primary" />
               {activePosition}
             </span>
+
           </div>
 
           {/* Viewport Box Simulator */}
@@ -172,7 +180,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('top-left')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'top-left'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -189,7 +197,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('top-center')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'top-center'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -206,7 +214,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('top-right')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'top-right'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -223,7 +231,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('bottom-left')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'bottom-left'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -240,7 +248,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('bottom-center')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'bottom-center'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -257,7 +265,7 @@ export default function Setup() {
                   onClick={() => handlePositionTrigger('bottom-right')}
                   className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-medium transition-all active:scale-95 shadow-xs sm:px-3 sm:py-2 ${
                     activePosition === 'bottom-right'
-                      ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold'
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
                       : 'border-border bg-card text-foreground hover:bg-accent/50'
                   }`}
                 >
@@ -279,9 +287,9 @@ export default function Setup() {
         {/* Setup Guide */}
         <div className="space-y-6">
           <div className="flex items-center gap-2">
-            <Terminal className="h-5 w-5 text-primary-500"/>
-            <h2 className="text-base font-bold tracking-tight text-foreground sm-text-lg">
-              Setup & Placemet Guide
+            <Terminal className="h-5 w-5 text-primary"/>
+            <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
+              Setup & Placement Guide
             </h2>
           </div>
           <div className="space-y-4">
@@ -302,7 +310,7 @@ export default function Setup() {
         {/* API Reference Table */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <Sliders className="h-5 w-5 text-primary-500" />
+            <Sliders className="h-5 w-5 text-primary" />
             <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
               Toaster Component Props
             </h2>
@@ -321,25 +329,25 @@ export default function Setup() {
               <tbody className="divide-y divide-border font-mono text-muted-foreground">
                 <tr>
                   <td className="p-3.5 font-semibold text-foreground whitespace-nowrap">position</td>
-                  <td className="p-3.5 text-primary-600 dark:text-primary-400 whitespace-nowrap">ToastPosition</td>
+                  <td className="p-3.5 text-primary whitespace-nowrap">ToastPosition</td>
                   <td className="p-3.5 whitespace-nowrap">&quot;top-center&quot;</td>
                   <td className="font-sans min-w-[220px]">Initial viewport quadrant anchor for mounted stacks.</td>
                 </tr>
                 <tr>
                   <td className="p-3.5 font-semibold text-foreground whitespace-nowrap">defaultDuration</td>
-                  <td className="p-3.5 text-primary-600 dark:text-primary-400 whitespace-nowrap">number</td>
+                  <td className="p-3.5 text-primary whitespace-nowrap">number</td>
                   <td className="p-3.5 whitespace-nowrap">4000</td>
                   <td className="font-sans min-w-[220px]">Default dismiss timer in milliseconds.</td>
                 </tr>
                 <tr>
                   <td className="p-3.5 font-semibold text-foreground whitespace-nowrap">showProgress</td>
-                  <td className="p-3.5 text-primary-600 dark:text-primary-400 whitespace-nowrap">boolean</td>
+                  <td className="p-3.5 text-primary whitespace-nowrap">boolean</td>
                   <td className="p-3.5 whitespace-nowrap">true</td>
                   <td className="font-sans min-w-[220px]">Shows or hides the countdown progression bar.</td>
                 </tr>
                 <tr>
                   <td className="p-3.5 font-semibold text-foreground whitespace-nowrap">className</td>
-                  <td className="p-3.5 text-primary-600 dark:text-primary-400 whitespace-nowrap">string</td>
+                  <td className="p-3.5 text-primary whitespace-nowrap">string</td>
                   <td className="p-3.5 whitespace-nowrap">&quot;&quot;</td>
                   <td className="font-sans min-w-[220px]">Utility class overrides for the portal container.</td>
                 </tr>
