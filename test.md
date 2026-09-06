@@ -466,3 +466,64 @@ export default function Page() {
   );
 }
 ```
+# Variants
+```tsx
+{/* Variants */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
+            Preset Variants
+          </h2>
+        </div>
+        {/* Note */}
+        <p className="text-xs text-muted-foreground">
+          Explore the core preset variants, icon integrations, and loading states available out of the box.
+        </p>
+        {/* Presets view with codeblock */}
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6 rounded-2xl border border-border bg-card p-6 shadow-xs">
+            <Button variant="default">Default</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>
+              Outline + Icon
+            </Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button loading loadingText="Saving...">
+              Loading
+            </Button>
+            <Button variant="success">Success</Button>
+          </div>
+
+          <div className="w-full rounded-2xl border border-border bg-card p-4 shadow-xs sm:p-5">
+            <div className="flex items-center justify-between pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Usage Example
+              </span>
+            </div>
+            <pre className="w-full overflow-x-auto rounded-xl bg-[#090b10] p-4 font-mono text-xs leading-relaxed text-neutral-200">
+              <code>{`import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
+
+export function ButtonVariantsDemo() {
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
+      <Button variant="default">Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>
+        Outline + Icon
+      </Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button loading loadingText="Saving...">
+        Loading
+      </Button>
+      <Button variant="success">Success</Button>
+    </div>
+  );
+}`}</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+```
