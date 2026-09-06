@@ -1,9 +1,18 @@
+'use client'
+
 import Header from '@/components/app/docs/components/header';
 import { Button } from '@/components/ui/button';
-import { Mail, Terminal } from 'lucide-react';
-import React from 'react'
+import { Check, Copy, Mail, Terminal } from 'lucide-react';
+import React, { useState } from 'react'
 
 export default function ButtonDocPage() {
+  const [copiedStep, setCopiedStep] = useState<number | null>(null);
+
+  const copyToClipboard = (text: string, stepIndex: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedStep(stepIndex);
+    setTimeout(() => setCopiedStep(null), 2000);
+  };
   return (
     <div className="w-full min-w-0 space-y-10">
       {/* Header */}
@@ -24,6 +33,32 @@ export default function ButtonDocPage() {
           <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
             Quick Setup Guide
           </h2>
+        </div>
+
+        <div className="space-y-4">
+          {/* Step 1: Install */}
+          <div className="w-full rounded-2xl border border-border bg-card p-4 shadow-xs sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground sm:text-sm">
+                Step 1: Install Component via CLI
+              </span>
+              <button 
+                type="button"
+                onClick={() => copyToClipboard('npx @marv3l/canopy-ui add button', 1)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-background/50 px-2.5 py-1 text-xs text-muted-foreground transition-all hover:bg-muted hover:text-foreground"
+              >
+                {copiedStep === 1 ? (
+                  <Check className="h-3.5 w-3.5 text-emerald-500" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
+                )}
+                <span>{copiedStep === 1 ? 'Copied' : 'Copy'}</span>
+              </button>
+            </div>
+            <pre className="w-full overflow-x-auto rounded-xl bg-[#090b10] p-4 font-mono text-xs leading-relaxed text-neutral-200">
+              <code>npx @marv3l/canopy-ui add button</code>
+            </pre>
+          </div>
         </div>
       </div>
 

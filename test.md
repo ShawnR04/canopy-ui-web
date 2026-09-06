@@ -527,3 +527,273 @@ export function ButtonVariantsDemo() {
         </div>
       </div>
 ```
+
+# Button Doc
+``tsx
+'use client'
+
+import Header from '@/components/app/docs/components/header';
+import { Button } from '@/components/ui/button';
+import { Check, Copy, Mail, Terminal, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react'
+
+const buttonCodeSnippets: Record<string, { title: string; desc: string; code: string }> = {
+  default: {
+    title: 'Default',
+    desc: 'The primary solid brand action for main user journeys.',
+    code: `<Button variant="default">Button</Button>`,
+  },
+  secondary: {
+    title: 'Secondary',
+    desc: 'Soft neutral alternative for secondary actions.',
+    code: `<Button variant="secondary">Secondary</Button>`,
+  },
+  destructive: {
+    title: 'Destructive',
+    desc: 'High-emphasis styling for critical or irreversible actions.',
+    code: `<Button variant="destructive">Destructive</Button>`,
+  },
+  outline: {
+    title: 'Outline',
+    desc: 'Clean surface border supporting leading or trailing icons.',
+    code: `<Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>\n  Login with Email\n</Button>`,
+  },
+  ghost: {
+    title: 'Ghost',
+    desc: 'Border-free variant designed for subtle hover interactions.',
+    code: `<Button variant="ghost">Ghost</Button>`,
+  },
+  link: {
+    title: 'Link',
+    desc: 'Renders the button with underline hyperlink presentation.',
+    code: `<Button variant="link">Link</Button>`,
+  },
+  success: {
+    title: 'Success',
+    desc: 'Affirmative green state for successful confirmations.',
+    code: `<Button variant="success">Success</Button>`,
+  },
+  loading: {
+    title: 'Loading',
+    desc: 'Indeterminate spinner and automatic text swap for async states.',
+    code: `<Button loading loadingText="Please wait...">\n  Submit\n</Button>`,
+  },
+  asChild: {
+    title: 'AsChild',
+    desc: 'Combines with Radix Slot to merge button props directly onto child elements like Next.js Links.',
+    code: `import Link from "next/link";
+
+<Button asChild>
+  <Link href="/login">Login</Link>
+</Button>`,
+  },
+};
+
+export default function ButtonDocPage() {
+  const [copiedStep, setCopiedStep] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('default');
+  const [previewMode, setPreviewMode] = useState<'preview' | 'code'>('preview');
+
+  const copyToClipboard = (text: string, stepIndex: string | number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedStep(Number(stepIndex));
+    setTimeout(() => setCopiedStep(null), 2000);
+  };
+
+  return (
+    <div className="w-full min-w-0 space-y-12 pb-16">
+      {/* Header */}
+      <Header
+        componentName="button"
+        title="Button"
+        desc="Displays a button or a component that looks like a button. Powered by CVA and Radix Slot."
+        breadcrumbs={[
+          { label: 'Components', href: '/docs/components' },
+          { label: 'Button', href: '/docs/components/button' },
+        ]}
+      />
+
+      {/* Interactive Shadcn-style Component Viewer */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold tracking-tight text-foreground">
+            Example
+          </h2>
+          <div className="flex items-center rounded-lg border border-border bg-muted/50 p-1">
+            <button
+              type="button"
+              onClick={() => setPreviewMode('preview')}
+              className={`rounded-md px-3 py-1 text-xs font-medium transition-all ${
+                previewMode === 'preview'
+                  ? 'bg-background text-foreground shadow-xs'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Preview
+            </button>
+            <button
+              type="button"
+              onClick={() => setPreviewMode('code')}
+              className={`rounded-md px-3 py-1 text-xs font-medium transition-all ${
+                previewMode === 'code'
+                  ? 'bg-background text-foreground shadow-xs'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Code
+            </button>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card shadow-xs overflow-hidden">
+          {previewMode === 'preview' ? (
+            <div className="flex min-h-[280px] flex-wrap items-center justify-center gap-4 p-8 sm:p-12">
+              <Button variant="default">Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="destructive">Destructive</Button>
+              <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>
+                Outline
+              </Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="link">Link</Button>
+              <Button variant="success">Success</Button>
+              <Button loading loadingText="Saving...">Loading</Button>
+            </div>
+          ) : (
+            <div className="relative bg-[#090b10] p-4 sm:p-5">
+              <button
+                type="button"
+                onClick={() => copyToClipboard(`<div className="flex flex-wrap items-center gap-3">
+  <Button variant="default">Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
+  <Button variant="success">Success</Button>
+  <Button loading loadingText="Saving...">Loading</Button>
+</div>`, 'playground')}
+                className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-background/10 px-2.5 py-1 text-xs text-neutral-300 transition-all hover:bg-background/20"
+              >
+                {copiedStep === Number('playground') ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                <span>{copiedStep === Number('playground') ? 'Copied' : 'Copy'}</span>
+              </button>
+              <pre className="overflow-x-auto font-mono text-xs leading-relaxed text-neutral-200">
+                <code>{`<div className="flex flex-wrap items-center gap-3">
+  <Button variant="default">Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
+  <Button variant="success">Success</Button>
+  <Button loading loadingText="Saving...">Loading</Button>
+</div>`}</code>
+              </pre>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Installation Guide */}
+      <div className="space-y-4">
+        <h2 className="text-lg font-bold tracking-tight text-foreground">
+          Installation
+        </h2>
+
+        <div className="space-y-4">
+          <div className="w-full rounded-2xl border border-border bg-card p-4 shadow-xs sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground sm:text-sm">
+                Run the CLI command
+              </span>
+              <button 
+                type="button"
+                onClick={() => copyToClipboard('npx @marv3l/canopy-ui add button', 1)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border/80 bg-background/50 px-2.5 py-1 text-xs text-muted-foreground transition-all hover:bg-muted hover:text-foreground"
+              >
+                {copiedStep === 1 ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+                <span>{copiedStep === 1 ? 'Copied' : 'Copy'}</span>
+              </button>
+            </div>
+            <pre className="w-full overflow-x-auto rounded-xl bg-[#090b10] p-4 font-mono text-xs leading-relaxed text-neutral-200">
+              <code>npx @marv3l/canopy-ui add button</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+
+      {/* Anatomy / Variants Section */}
+      <div className="space-y-4">
+        <h2 className="text-lg font-bold tracking-tight text-foreground">
+          Usage & Variants
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Explore individual variants with live previews and implementation details.
+        </p>
+
+        {/* Variant Tabs */}
+        <div className="flex flex-wrap gap-2 border-b border-border pb-3">
+          {Object.keys(buttonCodeSnippets).map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setActiveTab(key)}
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+                activeTab === key
+                  ? 'bg-primary text-primary-foreground shadow-xs'
+                  : 'bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              {buttonCodeSnippets[key].title}
+            </button>
+          ))}
+        </div>
+
+        {/* Active Variant Showcase Card */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 rounded-2xl border border-border bg-card p-6 shadow-xs">
+          <div className="flex min-h-[160px] items-center justify-center rounded-xl border border-dashed border-border bg-background/50 p-6">
+            {activeTab === 'default' && <Button variant="default">Default</Button>}
+            {activeTab === 'secondary' && <Button variant="secondary">Secondary</Button>}
+            {activeTab === 'destructive' && <Button variant="destructive">Destructive</Button>}
+            {activeTab === 'outline' && <Button variant="outline" leftIcon={<Mail className="h-4 w-4" />}>Login with Email</Button>}
+            {activeTab === 'ghost' && <Button variant="ghost">Ghost</Button>}
+            {activeTab === 'link' && <Button variant="link">Link</Button>}
+            {activeTab === 'success' && <Button variant="success">Success</Button>}
+            {activeTab === 'loading' && <Button loading loadingText="Please wait...">Submit</Button>}
+            {activeTab === 'asChild' && (
+              <Button asChild>
+                <a href="#login" onClick={(e) => e.preventDefault()}>Login <ArrowRight className="ml-2 h-4 w-4" /></a>
+              </Button>
+            )}
+          </div>
+
+          <div className="flex flex-col justify-between space-y-3">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  {buttonCodeSnippets[activeTab].title} Variant
+                </span>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(buttonCodeSnippets[activeTab].code, 'active')}
+                  className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground hover:text-foreground"
+                >
+                  {copiedStep === Number('active') ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
+                  <span>{copiedStep === Number('active') ? 'Copied' : 'Copy'}</span>
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {buttonCodeSnippets[activeTab].desc}
+              </p>
+            </div>
+            <pre className="overflow-x-auto rounded-xl bg-[#090b10] p-4 font-mono text-xs leading-relaxed text-neutral-200">
+              <code>{buttonCodeSnippets[activeTab].code}</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
