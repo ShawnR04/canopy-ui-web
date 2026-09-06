@@ -81,7 +81,7 @@
   --primary-700: oklch(0.46 0.15 245);
   --primary-800: oklch(0.38 0.12 245);
   --primary-900: oklch(0.30 0.09 245);
-  --primary-950: oklch(0.20 0.06 245);
+  --primary-950: #00172f;
   --primary-foreground: oklch(0.99 0.002 245);
 
   /* Secondary & Accents */

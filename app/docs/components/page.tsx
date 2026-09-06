@@ -6,6 +6,7 @@ import {
   ArrowUpRight,
   BellRing,
   PlaySquare,
+  Bone
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -74,10 +75,19 @@ const COMPONENTS: ComponentButton[] = [
     href: '/docs/components/button',
     category: 'Form',
     icon: PlaySquare,
-    status: 'Coming Soon',
+    status: 'Ready',
     colorClass: 'text-sky-500 dark:text-sky-400',
     bgClass: 'bg-sky-500/10 border-sky-500/20',
   },
+  {
+  name: 'Skeleton Frame',
+  href: '/docs/components/skeleton',
+  category: 'Feedback',
+  icon: Bone, // from 'lucide-react'
+  status: 'Coming Soon',
+  colorClass: 'text-zinc-500 dark:text-zinc-400',
+  bgClass: 'bg-zinc-500/10 border-zinc-500/20',
+},
 ];
 
 export default function Components() {

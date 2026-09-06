@@ -38,6 +38,11 @@ export const navigation = [
         title: 'Toast',
         desc: 'Customizable notification alerts with variants, positioning, and durations.',
       },
+      {
+        href: '/docs/components/button',
+        title: 'Button',
+        desc: 'Interactive button primitive with CVA variants, loading states, and icon slots.',
+      },
     ],
   },
   {
