@@ -6,7 +6,8 @@ import {
   ArrowUpRight,
   BellRing,
   PlaySquare,
-  Bone
+  Bone,
+  Tag
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -79,6 +80,15 @@ const COMPONENTS: ComponentButton[] = [
     colorClass: 'text-sky-500 dark:text-sky-400',
     bgClass: 'bg-sky-500/10 border-sky-500/20',
   },
+  {
+  name: 'Badge',
+  href: '/docs/components/badge',
+  category: 'Data Display',
+  icon: Tag, // from 'lucide-react'
+  status: 'Ready',
+  colorClass: 'text-blue-500 dark:text-blue-400',
+  bgClass: 'bg-blue-500/10 border-blue-500/20',
+},
   {
   name: 'Skeleton Frame',
   href: '/docs/components/skeleton',
