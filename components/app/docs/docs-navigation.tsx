@@ -43,6 +43,16 @@ export const navigation = [
         title: 'Button',
         desc: 'Interactive button primitive with CVA variants, loading states, and icon slots.',
       },
+      {
+        href: '/docs/components/badge',
+        title: 'Badge',
+        desc: 'Versatile status indicator with CVA variants, custom icons, and pulsing indicators.',
+      },
+      {
+        href: '/docs/components/input',
+        title: 'Input',
+        desc: 'Accessible text input with automated icon padding wrappers and validation states.',
+      },
     ],
   },
   {
