@@ -7,7 +7,8 @@ import {
   BellRing,
   PlaySquare,
   Bone,
-  Tag
+  Tag,
+  TextCursorInput
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -81,23 +82,32 @@ const COMPONENTS: ComponentButton[] = [
     bgClass: 'bg-sky-500/10 border-sky-500/20',
   },
   {
-  name: 'Badge',
-  href: '/docs/components/badge',
-  category: 'Data Display',
-  icon: Tag, // from 'lucide-react'
-  status: 'Ready',
-  colorClass: 'text-blue-500 dark:text-blue-400',
-  bgClass: 'bg-blue-500/10 border-blue-500/20',
-},
+    name: 'Badge',
+    href: '/docs/components/badge',
+    category: 'Data Display',
+    icon: Tag, // from 'lucide-react'
+    status: 'Ready',
+    colorClass: 'text-blue-500 dark:text-blue-400',
+    bgClass: 'bg-blue-500/10 border-blue-500/20',
+  },
   {
-  name: 'Skeleton Frame',
-  href: '/docs/components/skeleton',
-  category: 'Feedback',
-  icon: Bone, // from 'lucide-react'
-  status: 'Coming Soon',
-  colorClass: 'text-zinc-500 dark:text-zinc-400',
-  bgClass: 'bg-zinc-500/10 border-zinc-500/20',
-},
+    name: 'Input',
+    href: '/docs/components/input',
+    category: 'Forms',
+    icon: TextCursorInput, // from 'lucide-react'
+    status: 'Ready',
+    colorClass: 'text-violet-500 dark:text-violet-400',
+    bgClass: 'bg-violet-500/10 border-violet-500/20',
+  },
+  {
+    name: 'Skeleton Frame',
+    href: '/docs/components/skeleton',
+    category: 'Feedback',
+    icon: Bone, // from 'lucide-react'
+    status: 'Coming Soon',
+    colorClass: 'text-zinc-500 dark:text-zinc-400',
+    bgClass: 'bg-zinc-500/10 border-zinc-500/20',
+  },
 ];
 
 export default function Components() {
